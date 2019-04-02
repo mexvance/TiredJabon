@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ServiceReference;
 using TiredJabon.Models;
 
-namespace TiredJabon.Controllers
+namespace TiredJabon.Controllershttpshttpshttps
 {
     public class HomeController : Controller
     {
@@ -28,10 +29,16 @@ namespace TiredJabon.Controllers
         ViewData["memes"]= (string)jObject["data"]["memes"][num]["name"];
         ViewData["url"] = (string)jObject["data"]["memes"][num]["url"];*/
         //ViewData["memes"] = request;
-        var url = "https://api.imgflip.com/caption_image?template_id=129242436&username=mexvance&password=Restapi1&text0="+ text0;
+            var url = "https://api.imgflip.com/caption_image?template_id=129242436&username=mexvance&password=Restapi1&text0="+ text0;
             var request = GetReleases(url);
             jObject = JObject.Parse(request);
             ViewData["url"] = (string)jObject["data"]["url"];
+
+            //Soap call 
+            var client = new TextCasingSoapTypeClient(TextCasingSoapTypeClient.EndpointConfiguration.TextCasingSoap);
+            var myQuote = client.AllLowercaseWithTokenAsync(text0, "");
+            ViewData["memes"] = myQuote.Result.Body.AllLowercaseWithTokenResult.ToString();
+
             return View();
 
         }
