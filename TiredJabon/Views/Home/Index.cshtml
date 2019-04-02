@@ -3,8 +3,8 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Random Change My Mind Memes</h1>
 </div>
-<div>@ViewData["memes"]</div>
-<div><img src="@ViewData["url"]" /></div>
+<div class="text-center"><img  class="backgroundimg" src="@ViewData["url"]" /></div></div>
+<div class="text-center"><div class="words">@ViewData["memes"]</div></div>
+<div class="text-center"><a  asp-controller="Home" asp-action="Index"><button type ="submit">Change my Mind</button></a></div>
